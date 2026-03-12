@@ -1,4 +1,4 @@
-import { Context, Next } from "hono";
+import type { Context, Next } from "hono";
 import type { Env } from "../types";
 
 type AuthEnv = { Bindings: Env; Variables: { gameId: string; gameName: string } };
@@ -10,7 +10,7 @@ type AuthEnv = { Bindings: Env; Variables: { gameId: string; gameName: string } 
 export async function apiKeyAuth(
   c: Context<AuthEnv>,
   next: Next
-): Promise<Response | void> {
+) {
   const authHeader = c.req.header("Authorization");
   if (!authHeader) {
     return c.json(
